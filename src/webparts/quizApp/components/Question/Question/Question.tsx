@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { FC } from 'react'
+import Answer from '../Answer/Answer'
 
 
 interface QuestionTypes {
@@ -21,28 +22,27 @@ const Question: FC<QuestionTypes> = ({
     selectedAnswer,
     handleAnswerSelection,
 }) => {
-    return (<h2>Question</h2>);
-    //   return (
-    //     <QuestionContainer>
-    //       <QuestionStyle>{question}</QuestionStyle>
-    //       {/* if question contains code snippet then show code */}
-    //       {code && <CodeSnippet code={code} language="javascript" />}
-    //       {/* if question contains an image */}
-    //       {image && <QuizImage image={image} />}
-    //       <AnswersContainer>
-    //         {choices.map((choice, index) => (
-    //           <Answer
-    //             choice={choice}
-    //             index={index}
-    //             key={index}
-    //             onChange={(e) => handleAnswerSelection(e, index)}
-    //             type={type}
-    //             selectedAnswer={selectedAnswer}
-    //           />
-    //         ))}
-    //       </AnswersContainer>
-    //     </QuestionContainer>
-    //   )
+    return (
+        <div>
+            <h2>{question}</h2>
+            {/* if question contains code snippet then show code */}
+            {/* {code && <CodeSnippet code={code} language="javascript" />} */}
+            {/* if question contains an image */}
+
+            <div>
+                {choices.map((choice, index) => (
+                    <Answer
+                        choice={choice}
+                        index={index}
+                        key={index}
+                        onChange={(e) => handleAnswerSelection(e, index)}
+                        type={type}
+                        selectedAnswer={selectedAnswer}
+                    />
+                ))}
+            </div>
+        </div>
+    )
 }
 
 export default Question
