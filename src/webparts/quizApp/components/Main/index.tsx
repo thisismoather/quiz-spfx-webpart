@@ -4,6 +4,7 @@ import Welcome from '../Welcome'
 import * as React from 'react'
 import UserDetails from '../UserDetails'
 import QuestionScreen from '../Question/QuestionScreen'
+import ResultScreen from '../ResultScreen/ResultScreen'
 
 function Main() {
     const { currentScreen } = useQuiz()
@@ -11,8 +12,8 @@ function Main() {
     const screenComponents = {
         [ScreenTypes.Welcome]: <Welcome />,
         [ScreenTypes.UserDetails]: <UserDetails />,
-        [ScreenTypes.Question]: <QuestionScreen />,
-        [ScreenTypes.Result]: <Welcome />,
+        [ScreenTypes.QuestionScreen]: <QuestionScreen />,
+        [ScreenTypes.ResultScreen]: <ResultScreen />,
     }
 
     const ComponentToRender = screenComponents[currentScreen] || <Welcome />

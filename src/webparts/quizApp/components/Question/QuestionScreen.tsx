@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
 import { useTimer } from '../../hooks';
 //import { ScreenTypes } from '../../types';
 import QuestionHeader from './QuestionHeader';
 import Question from './Question/Question';
+import { Dialog, DialogType, PrimaryButton } from '@fluentui/react';
 
 
 const QuestionScreen: React.FC = () => {
@@ -12,6 +13,7 @@ const QuestionScreen: React.FC = () => {
     const [selectedAnswer, setSelectedAnswer] = useState<string[]>([]);
     const [showTimerModal, setShowTimerModal] = useState<boolean>(false);
     const [showResultModal, setShowResultModal] = useState<boolean>(false);
+    //const [hideDialog, setHideDialog] = useState<boolean>(true);
 
     const {
         questions,
@@ -26,13 +28,11 @@ const QuestionScreen: React.FC = () => {
 
     const currentQuestion = questions[activeQuestion];
     const { question, type, choices, code, image, correctAnswers } = currentQuestion;
-    //const { type, correctAnswers } = currentQuestion;
 
     const onClickNext = () => {
         const isMatch: boolean =
             selectedAnswer.length === correctAnswers.length &&
-            // selectedAnswer.every((answer) => correctAnswers.includes(answer))
-            selectedAnswer.every((answer) => answer)
+            selectedAnswer.every((answer) => correctAnswers.includes(answer));
 
         // adding selected answer, and if answer matches key to result array with current question
         setResult([...result, { ...currentQuestion, selectedAnswer, isMatch }])
@@ -42,10 +42,11 @@ const QuestionScreen: React.FC = () => {
         } else {
             // how long does it take to finish the quiz
             const timeTaken = quizDetails.totalTime - timer
-            setEndTime(timeTaken)
-            setShowResultModal(true)
+            setEndTime(timeTaken);
+            setShowResultModal(true);
         }
-        setSelectedAnswer([])
+        // setHideDialog(false);
+        setSelectedAnswer([]);
     };
 
     const handleAnswerSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,32 +76,48 @@ const QuestionScreen: React.FC = () => {
     // };
 
     // to prevent scrolling when modal is opened
-    useEffect(() => {
-        if (showTimerModal || showResultModal) {
-            document.body.style.overflow = 'hidden'
-        }
-    }, [showTimerModal, showResultModal]);
+    // useEffect(() => {
+    //     if (showTimerModal || showResultModal) {
+    //         document.body.style.overflow = 'hidden'
+    //     }
+    // }, [showTimerModal, showResultModal]);
 
     // timer hooks, handle conditions related to time
     useTimer(timer, quizDetails, setEndTime, setTimer, setShowTimerModal, showResultModal);
 
     return (
-        <div>
-            <QuestionHeader
-                activeQuestion={activeQuestion}
-                totalQuestions={quizDetails.totalQuestions}
-                timer={timer}
-            />
-            <Question question={question} code={code}
-                image={image}
-                choices={choices}
-                type={type}
-                handleAnswerSelection={handleAnswerSelection}
-                selectedAnswer={selectedAnswer} />
-            <h2>question</h2>
+        <>
+            <div>
+                <QuestionHeader
+                    activeQuestion={activeQuestion}
+                    totalQuestions={quizDetails.totalQuestions}
+                    timer={timer}
+                />
+                <Question question={question} code={code}
+                    image={image}
+                    choices={choices}
+                    type={type}
+                    handleAnswerSelection={handleAnswerSelection}
+                    selectedAnswer={selectedAnswer} />
+                <div>
+                    <PrimaryButton text={activeQuestion === questions.length - 1 ? 'Finish' : 'Next'}
+                        onClick={onClickNext} disabled={selectedAnswer.length === 0}>Next</PrimaryButton>
+                </div>
+            </div>
 
-            <button onClick={onClickNext}>Next</button>
-        </div>
+
+            <Dialog
+                hidden={showTimerModal || showResultModal}
+                dialogContentProps={{
+                    type: DialogType.normal,
+                    title: showResultModal ? 'Done!' : 'Your time is up!',
+                    subText: `You have attempted ${result.length} questions in total.`
+                }}
+            >
+                <PrimaryButton text="Close" />
+            </Dialog>
+
+        </>
     );
 };
 

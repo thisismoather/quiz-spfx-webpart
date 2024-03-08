@@ -90,7 +90,7 @@ const QuizProvider = ({ children }: QuizProviderProps) => {
         totalScore,
     } = generalKnowledge
 
-    const selectQuizTopic = (topic: string) => {
+    const selectQuizTopic = (topic: string): void => {
         setQuizTopic(topic)
     }
 

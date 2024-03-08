@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction } from 'react';
 export enum ScreenTypes {
     Welcome,
     UserDetails,
-    Question,
-    Result,
+    QuestionScreen,
+    ResultScreen,
 }
 
 // Question Types

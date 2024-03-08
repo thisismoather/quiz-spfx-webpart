@@ -32,7 +32,7 @@ const UserDetails: React.FC = () => {
     };
 
     const startQuiz = () => {
-        setCurrentScreen(ScreenTypes.Question)
+        setCurrentScreen(ScreenTypes.QuestionScreen)
     }
 
     return (
