@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.19.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.18.2",
+    "libraryName": "quiz-spfx-webpart",
+    "libraryId": "60192405-e7c6-4103-83c1-941aa798de8a",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "quiz-spfx-webpart",
+    "solutionShortDescription": "quiz-spfx-webpart description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

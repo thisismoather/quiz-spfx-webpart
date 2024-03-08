@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "quiz-spfx-webpart-client-side-solution",
+    "id": "60192405-e7c6-4103-83c1-941aa798de8a",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "quiz-spfx-webpart description"
+      },
+      "longDescription": {
+        "default": "quiz-spfx-webpart description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "quiz-spfx-webpart Feature",
+        "description": "The feature that activates elements of the quiz-spfx-webpart solution.",
+        "id": "d60b39f4-9736-44a0-b3e2-d3d7ee68f500",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/quiz-spfx-webpart.sppkg"
+  }
+}
