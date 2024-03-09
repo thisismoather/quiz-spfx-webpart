@@ -12,6 +12,7 @@ interface QuestionTypes {
     choices: string[]
     selectedAnswer: string[]
     handleAnswerSelection: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void
+    selectedAnswerIndex: number | null | undefined
 }
 
 const Question: FC<QuestionTypes> = ({
@@ -22,6 +23,7 @@ const Question: FC<QuestionTypes> = ({
     choices,
     selectedAnswer,
     handleAnswerSelection,
+    selectedAnswerIndex
 }) => {
     return (
         <div className={styles.container}>
@@ -38,7 +40,7 @@ const Question: FC<QuestionTypes> = ({
                         key={index}
                         onChange={(e) => handleAnswerSelection(e, index)}
                         type={type}
-                        selectedAnswer={selectedAnswer}
+                        selectedAnswer={selectedAnswer} isSelected={selectedAnswerIndex === index}
                     />
                 ))}
             </div>

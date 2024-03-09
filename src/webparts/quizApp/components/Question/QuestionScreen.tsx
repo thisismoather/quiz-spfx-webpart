@@ -12,6 +12,7 @@ import styles from './QuestionScreen.module.scss';
 const QuestionScreen: React.FC = () => {
     const [activeQuestion, setActiveQuestion] = useState<number>(0);
     const [selectedAnswer, setSelectedAnswer] = useState<string[]>([]);
+    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null | undefined>(null)
     const [showTimerModal, setShowTimerModal] = useState<boolean>(false);
     const [showResultModal, setShowResultModal] = useState<boolean>(false);
     //const [hideDialog, setHideDialog] = useState<boolean>(true);
@@ -50,12 +51,13 @@ const QuestionScreen: React.FC = () => {
         setSelectedAnswer([]);
     };
 
-    const handleAnswerSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, checked } = e.target
+    const handleAnswerSelection = (e: React.ChangeEvent<HTMLInputElement>, index: number | null | undefined) => {
+        const { name, checked } = e.target;
 
+        setSelectedAnswerIndex(index);
         if (type === 'MAQs') {
-            // if (selectedAnswer.includes(name)) {
-            if (name) {
+            if (selectedAnswer.includes(name)) {
+
                 setSelectedAnswer((prevSelectedAnswer) =>
                     prevSelectedAnswer.filter((element) => element !== name)
                 )
@@ -99,7 +101,7 @@ const QuestionScreen: React.FC = () => {
                     choices={choices}
                     type={type}
                     handleAnswerSelection={handleAnswerSelection}
-                    selectedAnswer={selectedAnswer} />
+                    selectedAnswer={selectedAnswer} selectedAnswerIndex={selectedAnswerIndex} />
                 <div className={styles.toolbox}>
                     <PrimaryButton text={activeQuestion === questions.length - 1 ? 'Finish' : 'Next'}
                         onClick={onClickNext} disabled={selectedAnswer.length === 0}>Next</PrimaryButton>

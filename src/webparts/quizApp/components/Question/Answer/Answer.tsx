@@ -1,59 +1,22 @@
 import { FC } from 'react'
 import styles from './Answer.Module.scss';
 //import { device } from '../../../styles/BreakPoints'
-import * as React from 'react'
-
-// const AnswerStyle = styled.div<{ highlightAnswer: boolean }>`
-//   font-size: clamp(18px, 4vw, 16px);
-//   color: ${({ theme }) => theme.colors.secondaryText};
-//   font-weight: 400;
-//   border: 1px solid
-//     ${({ highlightAnswer, theme }) =>
-//         highlightAnswer ? `${theme.colors.themeColor}` : `${theme.colors.border}`};
-//   background-color: ${({ highlightAnswer, theme }) =>
-//         highlightAnswer ? `${theme.colors.selectedAnswer}` : `${theme.colors.answerBg}`};
-//   border-radius: 16px;
-//   margin-top: clamp(13px, calc(10px + 6 * ((100vw - 600px) / 1320)), 16px);
-//   cursor: pointer;
-//   ${({ highlightAnswer }) =>
-//         highlightAnswer &&
-//         css`
-//       transition: border 0.2s ease-in;
-//     `}
-//   @media ${device.md} {
-//     font-weight: 500;
-//   }
-//   input {
-//     visibility: hidden;
-//     margin: 0;
-//   }
-// `
-
-// const AnswerLabel = styled.label`
-//   padding: 18px;
-//   display: flex;
-//   cursor: pointer;
-//   @media ${device.md} {
-//     padding: 14px;
-//   }
-// `
-
-//const ChoiceLabel = styled.span``
-
+import * as React from 'react';
 interface AnswerProps {
-    index: number
-    choice: string
-    type: string
-    selectedAnswer: string[]
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    index: number;
+    choice: string;
+    type: string;
+    selectedAnswer: string[];
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    isSelected: boolean;
 }
 
-const Answer: FC<AnswerProps> = ({ onChange, index, choice, type, selectedAnswer }) => {
+const Answer: FC<AnswerProps> = ({ onChange, index, choice, type, selectedAnswer, isSelected }) => {
     // Convert index to alphabet character to show ABCD before question
     const label = String.fromCharCode(65 + index)
 
     return (
-        <div className={styles.answer} key={index}>
+        <div className={isSelected ? `${styles.answer} ${styles.selected}` : styles.answer} key={index}>
             <label>
                 <span>{label}.</span>
                 <input

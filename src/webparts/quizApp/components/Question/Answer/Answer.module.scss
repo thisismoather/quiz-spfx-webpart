@@ -14,6 +14,14 @@
     }
 }
 
+.selected {
+    background-color: #FFD6FF;
+    color: "[theme:themeLight, default: #ffffff]";
+    color: var(--themeLight);
+    border: 1px solid #800080;
+
+}
+
 label {
     padding: 18px;
     display: flex;
