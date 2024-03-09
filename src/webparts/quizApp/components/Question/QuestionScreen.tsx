@@ -5,7 +5,8 @@ import { useTimer } from '../../hooks';
 //import { ScreenTypes } from '../../types';
 import QuestionHeader from './QuestionHeader';
 import Question from './Question/Question';
-import { Dialog, DialogType, PrimaryButton } from '@fluentui/react';
+import { PrimaryButton } from '@fluentui/react';
+import styles from './QuestionScreen.module.scss';
 
 
 const QuestionScreen: React.FC = () => {
@@ -86,7 +87,7 @@ const QuestionScreen: React.FC = () => {
     useTimer(timer, quizDetails, setEndTime, setTimer, setShowTimerModal, showResultModal);
 
     return (
-        <>
+        <div className='quiz-container'>
             <div>
                 <QuestionHeader
                     activeQuestion={activeQuestion}
@@ -99,14 +100,15 @@ const QuestionScreen: React.FC = () => {
                     type={type}
                     handleAnswerSelection={handleAnswerSelection}
                     selectedAnswer={selectedAnswer} />
-                <div>
+                <div className={styles.toolbox}>
                     <PrimaryButton text={activeQuestion === questions.length - 1 ? 'Finish' : 'Next'}
                         onClick={onClickNext} disabled={selectedAnswer.length === 0}>Next</PrimaryButton>
                 </div>
             </div>
 
+            <span>{showTimerModal || showResultModal ? 'Dialog!' : 'No Dialog!'}   </span>
 
-            <Dialog
+            {/* <Dialog
                 hidden={showTimerModal || showResultModal}
                 dialogContentProps={{
                     type: DialogType.normal,
@@ -115,9 +117,9 @@ const QuestionScreen: React.FC = () => {
                 }}
             >
                 <PrimaryButton text="Close" />
-            </Dialog>
+            </Dialog> */}
 
-        </>
+        </div>
     );
 };
 

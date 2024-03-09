@@ -1,6 +1,7 @@
-import * as React from 'react'
-import { FC } from 'react'
-import Answer from '../Answer/Answer'
+import * as React from 'react';
+import { FC } from 'react';
+import Answer from '../Answer/Answer';
+import styles from './Question.module.scss';
 
 
 interface QuestionTypes {
@@ -23,13 +24,13 @@ const Question: FC<QuestionTypes> = ({
     handleAnswerSelection,
 }) => {
     return (
-        <div>
+        <div className={styles.container}>
             <h2>{question}</h2>
             {/* if question contains code snippet then show code */}
             {/* {code && <CodeSnippet code={code} language="javascript" />} */}
             {/* if question contains an image */}
 
-            <div>
+            <div className={styles.answer}>
                 {choices.map((choice, index) => (
                     <Answer
                         choice={choice}

@@ -1,0 +1,20 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    background-color: "[theme:themeLight, default: #ffffff]";
+    background-color: var(--themeLight);
+    border-bottom: 1px solid "[theme:bodyDivider, default: #c8c6c4]";
+    border-bottom: 1px solid var(--bodyDivider);
+}
+
+.timer {
+    min-width: 60px;
+    font-size: clamp(16px, 5vw, 24px);
+    font-weight: 500;
+    margin-left: 8px;
+}

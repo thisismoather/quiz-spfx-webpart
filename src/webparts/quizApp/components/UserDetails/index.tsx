@@ -36,10 +36,17 @@ const UserDetails: React.FC = () => {
     }
 
     return (
-        <div>
-            <TextField label="Name" value={name} onChange={(e, newValue) => setName(newValue || '')} />
-            <Dropdown label="Country" options={countries} onChange={(e, option) => setCountry(option?.text || '')} />
-            <PrimaryButton onClick={startQuiz} text="Continue to Quiz" disabled={!isFormValid()} />
+
+        <div className='ms-Grid'>
+            <div className="ms-Grid-row">
+                <TextField label="Name" value={name} onChange={(e, newValue) => setName(newValue || '')} />
+            </div>
+            <div className="ms-Grid-row">
+                <Dropdown label="Country" options={countries} onChange={(e, option) => setCountry(option?.text || '')} />
+            </div>
+            <div className="ms-Grid-row">
+                <PrimaryButton onClick={startQuiz} text="Continue to Quiz" disabled={!isFormValid()} />
+            </div>
         </div>
     );
 };

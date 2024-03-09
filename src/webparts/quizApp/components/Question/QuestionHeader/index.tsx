@@ -1,10 +1,11 @@
 import { FC } from 'react'
-//import styled from 'styled-components'
+import { Text, Icon, Stack, Separator } from '@fluentui/react';
+import styles from './QuestionHeader.module.scss';
 
 //import { Flex } from '../../../styles/Global'
 //import { addLeadingZero, formatTime } from '../../../utils/helpers'
 
-import Timer from '../../Timer';
+//import Timer from '../../Timer';
 import * as React from 'react';
 
 // const ActiveQuestionNo = styled.span`
@@ -26,9 +27,26 @@ interface QuizHeaderProps {
 }
 
 const QuizHeader: FC<QuizHeaderProps> = ({ activeQuestion, totalQuestions, timer }) => {
+
+
+
     return (
-        <Timer time={`${timer}`} />
-    )
+        <>
+            <Stack horizontal horizontalAlign="space-between">
+                <Text variant="large">{`${1} of ${10} questions remaining`}</Text>
+                <Stack horizontal verticalAlign="center">
+                    <Icon iconName="Clock" />
+                    <span className={styles.timer}>{timer}</span>
+                </Stack>
+            </Stack>
+            <Separator />
+        </>
+    );
+    // return (
+    //     <div className={styles.header}>
+    //         <Timer time={`${timer}`} />
+    //     </div>
+    // )
 }
 
 export default QuizHeader

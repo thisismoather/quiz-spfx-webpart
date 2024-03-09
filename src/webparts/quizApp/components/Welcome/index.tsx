@@ -2,6 +2,7 @@ import * as React from 'react';
 import { PrimaryButton } from '@fluentui/react';
 import { useQuiz } from '../../context/QuizContext';
 import { ScreenTypes } from '../../types';
+import styles from './Welcome.module.scss';
 
 interface WelcomeProps {
     //onStartQuiz: () => void;
@@ -14,8 +15,8 @@ const Welcome: React.FC<WelcomeProps> = () => {
         setCurrentScreen(ScreenTypes.UserDetails)
     }
     return (
-        <div>
-            <h1>Welcome to the Quiz!</h1>
+        <div className={styles.container}>
+            <h2>Welcome to the Quiz!</h2>
             <section>
                 <p>Here are the instructions for the quiz:</p>
                 <ul>
@@ -25,7 +26,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
                 </ul>
             </section>
 
-            <PrimaryButton onClick={goToQuizDetailsScreen} >Start Quiz</PrimaryButton>
+            <PrimaryButton className={styles.button} onClick={goToQuizDetailsScreen} >Start Quiz</PrimaryButton>
         </div>
     );
 };

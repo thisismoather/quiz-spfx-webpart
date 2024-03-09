@@ -1,0 +1,9 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.toolbox {
+    position: absolute;
+    right: 60px;
+    bottom: 30px;
+    display: flex;
+    gap: 20px;
+}

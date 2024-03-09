@@ -1,0 +1,21 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.answer {
+    font-size: clamp(18px, 4vw, 16px);
+    font-weight: 400;
+    border: 1px solid "[theme:bodyDivider, default: #c8c6c4]";
+    border-radius: 16px;
+    margin-top: clamp(13px, calc(10px + 6 * ((100vw - 600px) / 1320)), 16px);
+    cursor: pointer;
+
+    input {
+        visibility: hidden;
+        margin: 0;
+    }
+}
+
+label {
+    padding: 18px;
+    display: flex;
+    cursor: pointer;
+}

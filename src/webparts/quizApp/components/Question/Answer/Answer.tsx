@@ -1,5 +1,5 @@
 import { FC } from 'react'
-//import styled, { css } from 'styled-components'
+import styles from './Answer.Module.scss';
 //import { device } from '../../../styles/BreakPoints'
 import * as React from 'react'
 
@@ -53,7 +53,7 @@ const Answer: FC<AnswerProps> = ({ onChange, index, choice, type, selectedAnswer
     const label = String.fromCharCode(65 + index)
 
     return (
-        <div key={index}>
+        <div className={styles.answer} key={index}>
             <label>
                 <span>{label}.</span>
                 <input

@@ -24,6 +24,6 @@ export const initialState: QuizContextTypes = {
 
 export const QuizContext = createContext<QuizContextTypes>(initialState)
 
-export function useQuiz() {
+export function useQuiz(): QuizContextTypes {
     return useContext(QuizContext)
 }
