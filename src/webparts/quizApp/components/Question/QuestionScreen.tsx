@@ -49,6 +49,7 @@ const QuestionScreen: React.FC = () => {
         }
         // setHideDialog(false);
         setSelectedAnswer([]);
+        setSelectedAnswerIndex(null);
     };
 
     const handleAnswerSelection = (e: React.ChangeEvent<HTMLInputElement>, index: number | null | undefined) => {
