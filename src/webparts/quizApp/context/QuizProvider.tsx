@@ -13,7 +13,7 @@ export const generalKnowledge: Topic = {
     level: 'Beginner',
     totalQuestions: 6,
     totalScore: 60,
-    totalTime: 120,
+    totalTime: 30,
     questions: [
         {
             question: 'What is the name of this reptile?',

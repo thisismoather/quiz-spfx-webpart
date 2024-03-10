@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
 import { useTimer } from '../../hooks';
-//import { ScreenTypes } from '../../types';
+import { ScreenTypes } from '../../types';
 import QuestionHeader from './QuestionHeader';
 import Question from './Question/Question';
-import { PrimaryButton } from '@fluentui/react';
+import { Dialog, DialogType, PrimaryButton } from '@fluentui/react';
 import styles from './QuestionScreen.module.scss';
 
 
@@ -22,7 +22,7 @@ const QuestionScreen: React.FC = () => {
         quizDetails,
         result,
         setResult,
-        //setCurrentScreen,
+        setCurrentScreen,
         timer,
         setTimer,
         setEndTime,
@@ -47,14 +47,15 @@ const QuestionScreen: React.FC = () => {
             setEndTime(timeTaken);
             setShowResultModal(true);
         }
-        // setHideDialog(false);
+        //setHideDialog(false);
         setSelectedAnswer([]);
         setSelectedAnswerIndex(null);
     };
 
     const handleAnswerSelection = (e: React.ChangeEvent<HTMLInputElement>, index: number | null | undefined) => {
         const { name, checked } = e.target;
-
+        console.log('name', showResultModal);
+        console.log(showTimerModal)
         setSelectedAnswerIndex(index);
         if (type === 'MAQs') {
             if (selectedAnswer.includes(name)) {
@@ -74,10 +75,10 @@ const QuestionScreen: React.FC = () => {
         }
     };
 
-    // const handleModal = () => {
-    //     setCurrentScreen(ScreenTypes.Result)
-    //     document.body.style.overflow = 'auto'
-    // };
+    const handleModal = () => {
+        setCurrentScreen(ScreenTypes.ResultScreen)
+        document.body.style.overflow = 'auto'
+    };
 
     // to prevent scrolling when modal is opened
     // useEffect(() => {
@@ -109,18 +110,22 @@ const QuestionScreen: React.FC = () => {
                 </div>
             </div>
 
-            <span>{showTimerModal || showResultModal ? 'Dialog!' : 'No Dialog!'}   </span>
+            {(showTimerModal || showResultModal) &&
+                (
+                    <Dialog
+                        hidden={false}
+                        dialogContentProps={{
+                            type: DialogType.normal,
+                            title: showResultModal ? 'Done!' : 'Your time is up!',
+                            subText: `You have attempted ${result.length} questions in total.`
+                        }}
+                    >
+                        <PrimaryButton text="Close" onClick={handleModal} />
+                    </Dialog>
+                )}
 
-            {/* <Dialog
-                hidden={showTimerModal || showResultModal}
-                dialogContentProps={{
-                    type: DialogType.normal,
-                    title: showResultModal ? 'Done!' : 'Your time is up!',
-                    subText: `You have attempted ${result.length} questions in total.`
-                }}
-            >
-                <PrimaryButton text="Close" />
-            </Dialog> */}
+
+
 
         </div>
     );

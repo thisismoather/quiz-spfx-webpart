@@ -1,0 +1,14 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: "[theme:themeLight, default: #ffffff]";
+    background-color: var(--themeLight);
+    color: "[theme:bodyText, default: #323130]";
+    color: var(--bodyText);
+}
