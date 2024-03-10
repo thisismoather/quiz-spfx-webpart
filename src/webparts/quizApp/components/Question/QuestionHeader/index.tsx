@@ -7,6 +7,7 @@ import styles from './QuestionHeader.module.scss';
 
 //import Timer from '../../Timer';
 import * as React from 'react';
+import { formatTime } from '../../../utils/helper';
 
 // const ActiveQuestionNo = styled.span`
 //   font-size: clamp(40px, 5vw, 60px);
@@ -36,7 +37,7 @@ const QuizHeader: FC<QuizHeaderProps> = ({ activeQuestion, totalQuestions, timer
                 <Text variant="large">{`${1} of ${10} questions remaining`}</Text>
                 <Stack horizontal verticalAlign="center">
                     <Icon iconName="Clock" />
-                    <span className={styles.timer}>{timer}</span>
+                    <span className={styles.timer}>{formatTime(timer)}</span>
                 </Stack>
             </Stack>
             <Separator />
