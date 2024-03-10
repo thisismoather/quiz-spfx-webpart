@@ -12,6 +12,18 @@
     border-bottom: 1px solid var(--bodyDivider);
 }
 
+.active-question-no {
+    font-size: 32px;
+    font-weight: 500;
+    color: #800080;
+}
+
+.total-question {
+    font-size: 16px;
+    font-weight: 500;
+    color: #e0dee3;
+}
+
 .timer {
     min-width: 60px;
     font-size: clamp(16px, 5vw, 24px);

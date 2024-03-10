@@ -3,7 +3,7 @@ import { ScreenTypes } from '../../types'
 import Welcome from '../Welcome'
 import * as React from 'react'
 import UserDetails from '../UserDetails'
-import QuestionScreen from '../Question/QuestionScreen'
+import QuestionScreen from '../QuestionScreen/QuestionScreen'
 import ResultScreen from '../ResultScreen/ResultScreen'
 
 function Main() {
