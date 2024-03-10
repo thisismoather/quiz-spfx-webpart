@@ -124,9 +124,6 @@ const QuestionScreen: React.FC = () => {
                     </Dialog>
                 )}
 
-
-
-
         </div>
     );
 };
