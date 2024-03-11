@@ -1,13 +1,12 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
 .container {
-    min-width: 773px;
-    min-height: 620px;
-    padding: 50px 10px 60px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    // min-width: 773px;
+    // min-height: 620px;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
     overflow: hidden;
     color: "[theme:bodyText, default: #323130]";
     color: var(--bodyText);
@@ -31,14 +30,4 @@ p {
     text-align: center;
     color: "[theme:bodyText, default: #323130]";
     color: var(--bodyText);
-}
-
-.button {
-    width: 195px;
-    min-height: 50px;
-    font-size: clamp(16px, 5vw, 24px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
 }

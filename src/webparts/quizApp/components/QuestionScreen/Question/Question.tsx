@@ -28,9 +28,6 @@ const Question: FC<QuestionTypes> = ({
     return (
         <div className={styles.container}>
             <h2>{question}</h2>
-            {/* if question contains code snippet then show code */}
-            {/* {code && <CodeSnippet code={code} language="javascript" />} */}
-            {/* if question contains an image */}
 
             <div className={styles.answer}>
                 {choices.map((choice, index) => (

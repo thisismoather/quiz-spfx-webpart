@@ -3,7 +3,7 @@ import styles from './QuizApp.module.scss';
 import type { IQuizAppProps } from './IQuizAppProps';
 //import { escape } from '@microsoft/sp-lodash-subset';
 import QuizProvider from '../context/QuizProvider';
-import Main from './Main';
+import Main from './Main/Main';
 
 const QuizApp: React.FC<IQuizAppProps> = ({
   description,

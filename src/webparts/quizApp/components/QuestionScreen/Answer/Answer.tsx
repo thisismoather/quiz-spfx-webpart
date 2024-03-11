@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import styles from './Answer.module.scss';
-//import { device } from '../../../styles/BreakPoints'
 import * as React from 'react';
 interface AnswerProps {
     index: number;

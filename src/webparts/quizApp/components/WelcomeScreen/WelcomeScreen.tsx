@@ -8,7 +8,7 @@ interface WelcomeProps {
     //onStartQuiz: () => void;
 }
 
-const Welcome: React.FC<WelcomeProps> = () => {
+const WelcomeScreen: React.FC<WelcomeProps> = () => {
     const { setCurrentScreen } = useQuiz();
 
     const goToQuizDetailsScreen = () => {
@@ -26,9 +26,9 @@ const Welcome: React.FC<WelcomeProps> = () => {
                 </ul>
             </section>
 
-            <PrimaryButton className={styles.button} onClick={goToQuizDetailsScreen} >Start Quiz</PrimaryButton>
+            <PrimaryButton onClick={goToQuizDetailsScreen} >Start Quiz</PrimaryButton>
         </div>
     );
 };
 
-export default Welcome;
+export default WelcomeScreen;

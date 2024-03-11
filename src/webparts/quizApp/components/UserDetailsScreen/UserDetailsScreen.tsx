@@ -69,7 +69,7 @@ const UserDetailsScreen: React.FC = () => {
     const hasErrors = Object.values(errors).some(error => error !== '');
 
     return (
-        <Stack tokens={{ childrenGap: 20 }} styles={{ root: { height: '100vh', justifyContent: 'space-between' } }}>
+        <Stack tokens={{ childrenGap: 20 }} styles={{ root: { height: '50vh', justifyContent: 'space-between' } }}>
             <Stack tokens={{ childrenGap: 20 }}>
                 <TextField label="Name" name="name" value={form.name} onChange={handleInputChange} required errorMessage={errors.name} />
                 <TextField label="Email" name="email" value={form.email} onChange={handleInputChange} required errorMessage={errors.email} />
