@@ -26,7 +26,8 @@ export const initialState: QuizContextTypes = {
         name: '',
         email: '',
         gender: '',
-        country: ''
+        country: '',
+        endTime: ''
     }
 }
 

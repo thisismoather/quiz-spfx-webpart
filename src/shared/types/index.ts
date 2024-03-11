@@ -36,6 +36,7 @@ export type UserDetails = {
     email: string
     gender: string
     country: string
+    endTime: string
 }
 
 export type QuizDetails = {
@@ -76,5 +77,10 @@ export type Country = {
     country: string;
 }
 
+export type TimeApiResponse = {
+    dateTime: string;
+    timeZone: string;
+    isDaylightSavingTime: boolean;
+};
 
 

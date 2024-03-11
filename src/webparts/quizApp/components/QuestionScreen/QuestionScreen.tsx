@@ -39,7 +39,7 @@ const QuestionScreen: React.FC = () => {
 
         // adding selected answer, and if answer matches key to result array with current question
         setResult([...result, { ...currentQuestion, selectedAnswer, isMatch }])
-        addQuizDetails(userDetails.id, quizDetails, result).then(() => {
+        addQuizDetails(userDetails.id, quizDetails, result, userDetails.endTime).then(() => {
             console.log('Quiz details added successfully');
         });
 
