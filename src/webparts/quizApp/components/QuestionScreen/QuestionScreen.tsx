@@ -7,6 +7,7 @@ import QuestionHeader from './QuestionHeader/QuestionHeader';
 import Question from './Question/Question';
 import { Dialog, DialogType, PrimaryButton } from '@fluentui/react';
 import styles from './QuestionScreen.module.scss';
+import { addQuizDetails } from '../../../../shared/services/SPService';
 
 
 const QuestionScreen: React.FC = () => {
@@ -15,7 +16,6 @@ const QuestionScreen: React.FC = () => {
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null | undefined>(null)
     const [showTimerModal, setShowTimerModal] = useState<boolean>(false);
     const [showResultModal, setShowResultModal] = useState<boolean>(false);
-    //const [hideDialog, setHideDialog] = useState<boolean>(true);
 
     const {
         questions,
@@ -26,6 +26,7 @@ const QuestionScreen: React.FC = () => {
         timer,
         setTimer,
         setEndTime,
+        userDetails
     } = useQuiz();
 
     const currentQuestion = questions[activeQuestion];
@@ -38,6 +39,9 @@ const QuestionScreen: React.FC = () => {
 
         // adding selected answer, and if answer matches key to result array with current question
         setResult([...result, { ...currentQuestion, selectedAnswer, isMatch }])
+        addQuizDetails(userDetails.id, quizDetails, result).then(() => {
+            console.log('Quiz details added successfully');
+        });
 
         if (activeQuestion !== questions.length - 1) {
             setActiveQuestion((prev) => prev + 1)
@@ -47,7 +51,6 @@ const QuestionScreen: React.FC = () => {
             setEndTime(timeTaken);
             setShowResultModal(true);
         }
-        //setHideDialog(false);
         setSelectedAnswer([]);
         setSelectedAnswerIndex(null);
     };
@@ -79,13 +82,6 @@ const QuestionScreen: React.FC = () => {
         setCurrentScreen(ScreenTypes.ResultScreen)
         document.body.style.overflow = 'auto'
     };
-
-    // to prevent scrolling when modal is opened
-    // useEffect(() => {
-    //     if (showTimerModal || showResultModal) {
-    //         document.body.style.overflow = 'hidden'
-    //     }
-    // }, [showTimerModal, showResultModal]);
 
     // timer hooks, handle conditions related to time
     useTimer(timer, quizDetails, setEndTime, setTimer, setShowTimerModal, showResultModal);

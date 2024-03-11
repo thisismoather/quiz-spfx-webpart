@@ -38,6 +38,13 @@ export type UserDetails = {
     country: string
 }
 
+export type QuizDetails = {
+    totalQuestions: number
+    totalScore: number
+    totalTime: number
+    selectedQuizTopic: string
+}
+
 export type QuizContextTypes = {
     currentScreen: ScreenTypes
     setCurrentScreen: Dispatch<SetStateAction<ScreenTypes>>
@@ -53,12 +60,7 @@ export type QuizContextTypes = {
     setTimer: Dispatch<SetStateAction<number>>
     endTime: number
     setEndTime: (type: number) => void
-    quizDetails: {
-        totalQuestions: number
-        totalScore: number
-        totalTime: number
-        selectedQuizTopic: string
-    }
+    quizDetails: QuizDetails
 }
 
 export type Topic = {

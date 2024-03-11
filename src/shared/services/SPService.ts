@@ -1,6 +1,7 @@
 import { SPFI, spfi } from "@pnp/sp";
 import { getSP } from "../../webparts/quizApp/config";
 import { Caching } from "@pnp/queryable";
+import { QuizDetails, Result } from "../types";
 
 const loadQuizData = async () => {
     try {
@@ -50,5 +51,22 @@ const saveUserDetails = async (userDetails: any) => {
         console.log("Error saving data to SharePoint list", error)
     }
 }
-export { loadQuizData, saveUserDetails };
+
+const addQuizDetails = async (itemId: number, quizDetails: QuizDetails, result: Result[]) => {
+    try {
+        const _sp: SPFI = getSP();
+        const item = await spfi(_sp).web.lists.getByTitle("UserQuiz").items.getById(itemId).update({
+            QuizTitle: quizDetails.selectedQuizTopic,
+            TotalQuestions: quizDetails.totalQuestions,
+            TotalScore: quizDetails.totalScore,
+            TotalTime: quizDetails.totalTime,
+            Questions: JSON.stringify(result)
+        });
+        return item;
+    } catch (error) {
+        console.log("Error saving data to SharePoint list", error)
+    }
+
+}
+export { loadQuizData, saveUserDetails, addQuizDetails };
 //export default loadQuizData;
