@@ -20,6 +20,14 @@ export const initialState: QuizContextTypes = {
         totalTime: 0,
         selectedQuizTopic: 'React',
     },
+    setUserDetails: () => { },
+    userDetails: {
+        id: 0,
+        name: '',
+        email: '',
+        gender: '',
+        country: ''
+    }
 }
 
 export const QuizContext = createContext<QuizContextTypes>(initialState)

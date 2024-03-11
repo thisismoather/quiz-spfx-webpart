@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ReactNode, useEffect, useState } from 'react'
 // import { QuizContextTypes, Result, ScreenTypes, Topic } from '../../../shared/types'
-import { Question, Result, ScreenTypes, Topic } from '../../../shared/types'
+import { Question, Result, ScreenTypes, Topic, UserDetails } from '../../../shared/types'
 import { QuizContext, initialState } from './QuizContext'
-import loadQuizData from '../../../shared/services/SPService';
+import { loadQuizData } from '../../../shared/services/SPService';
 
 type QuizProviderProps = {
     children: ReactNode
@@ -16,6 +16,7 @@ const QuizProvider = ({ children }: QuizProviderProps) => {
     const [endTime, setEndTime] = useState<number>(initialState.endTime)
     const [quizTopic, setQuizTopic] = useState<string>(initialState.quizTopic)
     const [result, setResult] = useState<Result[]>(initialState.result)
+    const [userDetails, setUserDetails] = useState<UserDetails>(initialState.userDetails)
     const [currentScreen, setCurrentScreen] = useState<ScreenTypes>(
         initialState.currentScreen
     )
@@ -73,6 +74,8 @@ const QuizProvider = ({ children }: QuizProviderProps) => {
         result,
         setResult,
         quizDetails,
+        userDetails,
+        setUserDetails,
         timer,
         setTimer,
         endTime,

@@ -7,6 +7,7 @@ import {
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import { SPHttpClient, SPHttpClientResponse, ISPHttpClientOptions } from '@microsoft/sp-http';
 
 import * as strings from 'QuizAppWebPartStrings';
 import QuizApp from './components/QuizApp';
@@ -121,5 +122,19 @@ export default class QuizAppWebPart extends BaseClientSideWebPart<IQuizAppWebPar
         }
       ]
     };
+  }
+
+  public getDataFromApi() {
+    const options: ISPHttpClientOptions = {
+      headers: new Headers(),
+      method: 'GET',
+      mode: 'cors'
+    };
+    this.context.spHttpClient.get('https://cors-anywhere.herokuapp.com/https://timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam', SPHttpClient.configurations.v1, options)
+      .then((apiResponse: SPHttpClientResponse) => {
+        apiResponse.json().then((data: any) => {
+          console.log(data);
+        });
+      })
   }
 }

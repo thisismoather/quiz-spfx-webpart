@@ -36,4 +36,19 @@ const loadQuizData = async () => {
     }
 };
 
-export default loadQuizData;
+const saveUserDetails = async (userDetails: any) => {
+    try {
+        const _sp: SPFI = getSP();
+        const item = await spfi(_sp).web.lists.getByTitle("UserQuiz").items.add({
+            Title: userDetails.name,
+            Email: userDetails.email,
+            Country: userDetails.country,
+            Gender: userDetails.gender
+        });
+        return item;
+    } catch (error) {
+        console.log("Error saving data to SharePoint list", error)
+    }
+}
+export { loadQuizData, saveUserDetails };
+//export default loadQuizData;

@@ -30,6 +30,13 @@ export type Question = {
     image?: string
 }
 
+export type UserDetails = {
+    id: number
+    name: string
+    email: string
+    gender: string
+    country: string
+}
 
 export type QuizContextTypes = {
     currentScreen: ScreenTypes
@@ -40,6 +47,8 @@ export type QuizContextTypes = {
     setQuestions: Dispatch<SetStateAction<any[]>>
     result: Result[]
     setResult: Dispatch<SetStateAction<any[]>>
+    userDetails: UserDetails
+    setUserDetails: Dispatch<SetStateAction<UserDetails>>
     timer: number
     setTimer: Dispatch<SetStateAction<number>>
     endTime: number
@@ -59,6 +68,10 @@ export type Topic = {
     totalScore: number
     totalTime: number
     questions: Question[]
+}
+
+export type Country = {
+    country: string;
 }
 
 

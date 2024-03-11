@@ -2,7 +2,7 @@ import { useQuiz } from '../../context/QuizContext'
 import { ScreenTypes } from '../../../../shared/types'
 import Welcome from '../Welcome'
 import * as React from 'react'
-import UserDetails from '../UserDetails'
+import UserDetailsScreen from '../UserDetailsScreen/UserDetailsScreen'
 import QuestionScreen from '../QuestionScreen/QuestionScreen'
 import ResultScreen from '../ResultScreen/ResultScreen'
 
@@ -11,7 +11,7 @@ function Main() {
 
     const screenComponents = {
         [ScreenTypes.Welcome]: <Welcome />,
-        [ScreenTypes.UserDetails]: <UserDetails />,
+        [ScreenTypes.UserDetails]: <UserDetailsScreen />,
         [ScreenTypes.QuestionScreen]: <QuestionScreen />,
         [ScreenTypes.ResultScreen]: <ResultScreen />,
     }
