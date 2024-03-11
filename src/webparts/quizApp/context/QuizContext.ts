@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { QuizContextTypes, ScreenTypes } from '../types'
+import { QuizContextTypes, ScreenTypes } from '../../../shared/types'
 
 export const initialState: QuizContextTypes = {
     currentScreen: ScreenTypes.Welcome,

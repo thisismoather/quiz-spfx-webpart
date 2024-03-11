@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PrimaryButton } from '@fluentui/react';
 import { useQuiz } from '../../context/QuizContext';
-import { ScreenTypes } from '../../types';
+import { ScreenTypes } from '../../../../shared/types';
 import styles from './Welcome.module.scss';
 
 interface WelcomeProps {

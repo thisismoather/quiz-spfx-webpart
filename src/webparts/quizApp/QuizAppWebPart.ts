@@ -11,6 +11,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'QuizAppWebPartStrings';
 import QuizApp from './components/QuizApp';
 import { IQuizAppProps } from './components/IQuizAppProps';
+import { getSP } from './config';
 
 export interface IQuizAppWebPartProps {
   description: string;
@@ -37,9 +38,12 @@ export default class QuizAppWebPart extends BaseClientSideWebPart<IQuizAppWebPar
   }
 
   protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
+    this._getEnvironmentMessage().then(message => {
       this._environmentMessage = message;
     });
+
+    getSP(this.context);
+    return super.onInit();
   }
 
 

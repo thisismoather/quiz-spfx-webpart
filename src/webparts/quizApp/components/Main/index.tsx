@@ -1,5 +1,5 @@
 import { useQuiz } from '../../context/QuizContext'
-import { ScreenTypes } from '../../types'
+import { ScreenTypes } from '../../../../shared/types'
 import Welcome from '../Welcome'
 import * as React from 'react'
 import UserDetails from '../UserDetails'

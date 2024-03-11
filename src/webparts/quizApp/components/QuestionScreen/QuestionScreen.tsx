@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
 import { useTimer } from '../../hooks';
-import { ScreenTypes } from '../../types';
+import { ScreenTypes } from '../../../../shared/types';
 import QuestionHeader from './QuestionHeader/QuestionHeader';
 import Question from './Question/Question';
 import { Dialog, DialogType, PrimaryButton } from '@fluentui/react';

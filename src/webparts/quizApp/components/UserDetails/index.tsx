@@ -1,7 +1,7 @@
 import { Dropdown, IDropdownOption, PrimaryButton, TextField } from '@fluentui/react';
 import * as  React from 'react';
 import { useQuiz } from '../../context/QuizContext';
-import { ScreenTypes } from '../../types';
+import { ScreenTypes } from '../../../../shared/types';
 
 const UserDetails: React.FC = () => {
     const [name, setName] = React.useState('');
