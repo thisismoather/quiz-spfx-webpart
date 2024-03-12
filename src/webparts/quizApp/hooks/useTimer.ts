@@ -11,7 +11,7 @@ const useTimer = (
     setTimer: Dispatch<SetStateAction<number>>,
     setShowTimerModal: (time: boolean) => void,
     showResultModal: boolean
-) => {
+): void => {
     useEffect(() => {
         if (timer <= 0) {
             const timeTaken = quizDetails.totalTime

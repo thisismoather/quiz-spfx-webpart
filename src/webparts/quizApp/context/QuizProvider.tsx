@@ -6,10 +6,12 @@ import { QuizContext, initialState } from './QuizContext'
 import { loadQuizData } from '../../../shared/services/SPService';
 
 type QuizProviderProps = {
+    quizList: string
+    userQuizList: string
     children: ReactNode
 }
 
-const QuizProvider = ({ children }: QuizProviderProps) => {
+const QuizProvider = ({ children, quizList, userQuizList }: QuizProviderProps) => {
     const [quizzes, setQuizzes] = useState<Topic[]>([])
     const [loading, setLoading] = useState<boolean>(true)
     const [timer, setTimer] = useState<number>(initialState.timer)
@@ -25,7 +27,7 @@ const QuizProvider = ({ children }: QuizProviderProps) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await loadQuizData();
+                const data = await loadQuizData(quizList);
                 setQuizzes(data);
                 setLoading(false);
             } catch (error) {
@@ -46,8 +48,6 @@ const QuizProvider = ({ children }: QuizProviderProps) => {
         }
     }, [quizzes, quizTopic]);
 
-    let quizContextValue: any = undefined;
-
 
     const selectQuizTopic = (topic: string): void => {
         setQuizTopic(topic)
@@ -57,14 +57,31 @@ const QuizProvider = ({ children }: QuizProviderProps) => {
     if (loading) {
         return <div>Loading...</div>
     }
-    const quizDetails = {
-        totalQuestions: questions.length,
-        totalScore: questions.reduce((acc, q) => acc + q.score, 0),
-        // totalTime,
-        selectedQuizTopic: quizTopic,
-    };
 
-    quizContextValue = {
+    // const quizContextValue = {
+    //     quizList,
+    //     userQuizList,
+    //     currentScreen,
+    //     setCurrentScreen,
+    //     quizTopic,
+    //     selectQuizTopic,
+    //     questions,
+    //     setQuestions,
+    //     result,
+    //     setResult,
+    //     quizDetails,
+    //     userDetails,
+    //     setUserDetails,
+    //     timer,
+    //     setTimer,
+    //     endTime,
+    //     setEndTime,
+    // }
+
+
+    const quizContextValue = {
+        quizList,
+        userQuizList,
         currentScreen,
         setCurrentScreen,
         quizTopic,
@@ -73,7 +90,12 @@ const QuizProvider = ({ children }: QuizProviderProps) => {
         setQuestions,
         result,
         setResult,
-        quizDetails,
+        quizDetails: {
+            totalQuestions: questions.length,
+            totalScore: questions.reduce((acc, q) => acc + q.score, 0),
+            totalTime: timer, // Add totalTime property
+            selectedQuizTopic: quizTopic,
+        },
         userDetails,
         setUserDetails,
         timer,
@@ -81,7 +103,6 @@ const QuizProvider = ({ children }: QuizProviderProps) => {
         endTime,
         setEndTime,
     }
-
 
     return <QuizContext.Provider value={quizContextValue}>{children}</QuizContext.Provider>
 }

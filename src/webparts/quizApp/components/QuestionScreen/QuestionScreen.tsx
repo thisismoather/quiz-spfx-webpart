@@ -18,6 +18,7 @@ const QuestionScreen: React.FC = () => {
     const [showResultModal, setShowResultModal] = useState<boolean>(false);
 
     const {
+        userQuizList,
         questions,
         quizDetails,
         result,
@@ -39,7 +40,7 @@ const QuestionScreen: React.FC = () => {
 
         // adding selected answer, and if answer matches key to result array with current question
         setResult([...result, { ...currentQuestion, selectedAnswer, isMatch }])
-        addQuizDetails(userDetails.id, quizDetails, result, userDetails.endTime).then(() => {
+        addQuizDetails(userQuizList, userDetails.id, quizDetails, result, userDetails.endTime).then(() => {
             console.log('Quiz details added successfully');
         });
 

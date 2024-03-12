@@ -47,6 +47,8 @@ export type QuizDetails = {
 }
 
 export type QuizContextTypes = {
+    quizList: string
+    userQuizList: string
     currentScreen: ScreenTypes
     setCurrentScreen: Dispatch<SetStateAction<ScreenTypes>>
     quizTopic: string

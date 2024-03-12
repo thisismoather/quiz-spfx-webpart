@@ -13,6 +13,7 @@
   },
   "externals": {},
   "localizedResources": {
-    "QuizAppWebPartStrings": "lib/webparts/quizApp/loc/{locale}.js"
+    "QuizAppWebPartStrings": "lib/webparts/quizApp/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
 }

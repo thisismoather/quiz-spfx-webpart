@@ -6,7 +6,8 @@ import QuizProvider from '../context/QuizProvider';
 import Main from './Main/Main';
 
 const QuizApp: React.FC<IQuizAppProps> = ({
-  description,
+  quizList,
+  userQuizList,
   isDarkTheme,
   environmentMessage,
   hasTeamsContext,
@@ -14,7 +15,7 @@ const QuizApp: React.FC<IQuizAppProps> = ({
 }) => {
   return (
     <section className={`${styles.quizApp} ${hasTeamsContext ? styles.teams : ''}`}>
-      <QuizProvider>
+      <QuizProvider quizList={quizList} userQuizList={userQuizList}>
         <Main />
       </QuizProvider>
     </section>

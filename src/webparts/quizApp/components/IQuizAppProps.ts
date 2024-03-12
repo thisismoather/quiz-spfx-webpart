@@ -1,5 +1,6 @@
 export interface IQuizAppProps {
-  description: string;
+  quizList: string;
+  userQuizList: string;
   isDarkTheme: boolean;
   environmentMessage: string;
   hasTeamsContext: boolean;

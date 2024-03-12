@@ -10,7 +10,7 @@ const UserDetailsScreen: React.FC = () => {
     const [countries, setCountries] = useState<IComboBoxOption[]>([]);
     const [form, setForm] = useState({ name: '', email: '', gender: '', country: '' });
     const [errors, setErrors] = useState({ name: '', email: '', gender: '', country: '' });
-    const { setCurrentScreen, userDetails, setUserDetails, timer } = useQuiz();
+    const { userQuizList, setCurrentScreen, userDetails, setUserDetails, timer } = useQuiz();
 
     React.useEffect(() => {
         getCountries().then((countries: Country[]) => {
@@ -51,7 +51,7 @@ const UserDetailsScreen: React.FC = () => {
         }
 
         try {
-            saveUserDetails(form, timer).then((item): void => {
+            saveUserDetails(userQuizList, form, timer).then((item): void => {
                 console.log(item);
                 if (item) {
                     console.log('User details saved successfully');

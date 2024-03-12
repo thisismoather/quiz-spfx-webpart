@@ -2,8 +2,7 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
-  type IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  type IPropertyPaneConfiguration
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
@@ -13,9 +12,11 @@ import * as strings from 'QuizAppWebPartStrings';
 import QuizApp from './components/QuizApp';
 import { IQuizAppProps } from './components/IQuizAppProps';
 import { getSP } from './config';
+import { PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls';
 
 export interface IQuizAppWebPartProps {
-  description: string;
+  quizList: string;
+  userQuizList: string;
 }
 
 export default class QuizAppWebPart extends BaseClientSideWebPart<IQuizAppWebPartProps> {
@@ -27,7 +28,8 @@ export default class QuizAppWebPart extends BaseClientSideWebPart<IQuizAppWebPar
     const element: React.ReactElement<IQuizAppProps> = React.createElement(
       QuizApp,
       {
-        description: this.properties.description,
+        quizList: this.properties.quizList,
+        userQuizList: this.properties.userQuizList,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
@@ -113,8 +115,31 @@ export default class QuizAppWebPart extends BaseClientSideWebPart<IQuizAppWebPar
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyFieldListPicker('quizList', {
+                  label: 'Select a list',
+                  selectedList: this.properties.quizList,
+                  includeHidden: false,
+                  orderBy: PropertyFieldListPickerOrderBy.Title,
+                  disabled: false,
+                  baseTemplate: 100,
+                  onPropertyChange: this.onPropertyPaneFieldChanged,
+                  properties: this.properties,
+                  context: this.context,
+                  deferredValidationTime: 0,
+                  key: 'quizListPickerFieldId'
+                }),
+                PropertyFieldListPicker('userQuizList', {
+                  label: 'Select a list',
+                  selectedList: this.properties.userQuizList,
+                  includeHidden: false,
+                  orderBy: PropertyFieldListPickerOrderBy.Title,
+                  disabled: false,
+                  baseTemplate: 100,
+                  onPropertyChange: this.onPropertyPaneFieldChanged,
+                  properties: this.properties,
+                  context: this.context,
+                  deferredValidationTime: 0,
+                  key: 'userQuizlistPickerFieldId'
                 })
               ]
             }

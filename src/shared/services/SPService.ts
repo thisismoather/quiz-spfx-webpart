@@ -5,12 +5,12 @@ import { QuizDetails, Result, TimeApiResponse } from "../types";
 import { formatTime } from "../../webparts/quizApp/utils/helper";
 
 const timeApiUrl = "https://prod-248.westeurope.logic.azure.com/workflows/3dea4dbbf09d40f59f17225ffd6d7265/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=7cunIzBYKssiMtjG-aN25RHKT66B_j3rdFbw1Agm7W8&TimeZone=";
-const loadQuizData = async () => {
+const loadQuizData = async (list: string) => {
     try {
         const _sp: SPFI = getSP();
         const spCache = spfi(_sp).using(Caching({ store: "session" }));
 
-        const quizListItems = await spCache.web.lists.getByTitle("Quiz").items();
+        const quizListItems = await spCache.web.lists.getById(list).items();
 
         const quizzes = quizListItems.map((item: any) => {
             const questions = eval(item.Questions);
@@ -39,13 +39,13 @@ const loadQuizData = async () => {
     }
 };
 
-const saveUserDetails = async (userDetails: any, time: number) => {
+const saveUserDetails = async (list: string, userDetails: any, time: number) => {
     try {
         const _sp: SPFI = getSP();
         const timeResponse = await getStartAndEndTime(time)
         const startTime = timeResponse.originalDateTime;
         const endTime = timeResponse.calculationResult.dateTime;
-        const item = await spfi(_sp).web.lists.getByTitle("UserQuiz").items.add({
+        const item = await spfi(_sp).web.lists.getById(list).items.add({
             Title: userDetails.name,
             Email: userDetails.email,
             Country: userDetails.country,
@@ -59,14 +59,14 @@ const saveUserDetails = async (userDetails: any, time: number) => {
     }
 }
 
-const addQuizDetails = async (itemId: number, quizDetails: QuizDetails, result: Result[], endTime: string) => {
+const addQuizDetails = async (list: string, itemId: number, quizDetails: QuizDetails, result: Result[], endTime: string) => {
     try {
         const _sp: SPFI = getSP();
         const resp = await getCurrentTime()
         const currentTime = new Date(resp.dateTime);
         const deadline = new Date(endTime)
         if (currentTime <= deadline) {
-            const item = await spfi(_sp).web.lists.getByTitle("UserQuiz").items.getById(itemId).update({
+            const item = await spfi(_sp).web.lists.getById(list).items.getById(itemId).update({
                 QuizTitle: quizDetails.selectedQuizTopic,
                 TotalQuestions: quizDetails.totalQuestions,
                 TotalScore: quizDetails.totalScore,
