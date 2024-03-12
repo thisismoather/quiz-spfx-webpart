@@ -1,73 +1,55 @@
-# quiz-spfx-webpart
+# SPFx Quiz Web Part Deployment and Configuration Guide
 
-## Summary
-
-Short summary on functionality and used technologies.
-
-[picture of the solution in action, if possible]
-
-## Used SharePoint Framework Version
-
-![version](https://img.shields.io/badge/version-1.18.2-green.svg)
-
-## Applies to
-
-- [SharePoint Framework](https://aka.ms/spfx)
-- [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
+This guide provides instructions on how to deploy and configure the SPFx Quiz web part. This web part depends on two SharePoint lists: Quiz and User Quiz.
 
 ## Prerequisites
 
-> Any special pre-requisites?
+- SharePoint Online tenant
+- SharePoint Framework development environment
 
-## Solution
+## Deployment
 
-| Solution    | Author(s)                                               |
-| ----------- | ------------------------------------------------------- |
-| folder name | Author details (name, company, twitter alias with link) |
+1. Clone the repository or download the SPFx solution package (.sppkg file).
+2. Upload the solution package to the SharePoint App Catalog.
+3. Deploy the solution package.
 
-## Version history
+## Configuration
 
-| Version | Date             | Comments        |
-| ------- | ---------------- | --------------- |
-| 1.1     | March 10, 2021   | Update comment  |
-| 1.0     | January 29, 2021 | Initial release |
+### Quiz List
 
-## Disclaimer
+Create a new list named "Quiz" with the following columns:
 
-**THIS CODE IS PROVIDED _AS IS_ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
+- Title (Type: Single line of text): The title of the quiz.
+- Level (Type: Choice): The difficulty level of the quiz. Options: Beginner, Intermediate, Advanced.
+- TotalQuestions (Type: Number): The total number of questions in the quiz.
+- TotalScore (Type: Number): The total score of the quiz.
+- Questions (Type: Multiple lines of text): The questions for the quiz.
 
----
+### User Quiz List
 
-## Minimal Path to Awesome
+Create a new list named "User Quiz" with the following columns:
 
-- Clone this repository
-- Ensure that you are at the solution folder
-- in the command-line run:
-  - **npm install**
-  - **gulp serve**
+- Title (Type: Single line of text): The title of the user quiz.
+- Email (Type: Single line of text): The email of the user.
+- Country (Type: Single line of text): The country of the user.
+- Gender (Type: Choice): The gender of the user.
+- QuizTitle (Type: Single line of text): The title of the quiz that the user took.
+- TotalQuestions (Type: Number): The total number of questions in the quiz.
+- TotalScore (Type: Number): The total score of the quiz.
+- Questions (Type: Multiple lines of text): The questions in the quiz.
+- StartTime (Type: Date and Time): The time when the user started the quiz.
+- EndTime (Type: Date and Time): The time when the user finished the quiz.
 
-> Include any additional steps as needed.
+## Using the Web Part
 
-## Features
+1. Add the web part to a page.
+2. Configure the web part properties as needed.
 
-Description of the extension that expands upon high-level summary above.
+## Troubleshooting
 
-This extension illustrates the following concepts:
+If you encounter any issues while deploying or configuring the web part, please check the following:
 
-- topic 1
-- topic 2
-- topic 3
+- Ensure that you have the necessary permissions to deploy SPFx solutions and create lists in SharePoint.
+- Ensure that the names of the lists and their columns match exactly with the names specified in this guide.
+- If the web part does not display the quizzes correctly, ensure that the Quiz list contains at least one item.
 
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
-
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
-
-## References
-
-- [Getting started with SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-- [Building for Microsoft teams](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/build-for-teams-overview)
-- [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
-- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
-- [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
