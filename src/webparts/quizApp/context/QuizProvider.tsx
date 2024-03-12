@@ -12,23 +12,29 @@ type QuizProviderProps = {
 }
 
 const QuizProvider = ({ children, quizList, userQuizList }: QuizProviderProps) => {
-    const [quizzes, setQuizzes] = useState<Topic[]>([])
-    const [loading, setLoading] = useState<boolean>(true)
-    const [timer, setTimer] = useState<number>(initialState.timer)
-    const [endTime, setEndTime] = useState<number>(initialState.endTime)
-    const [quizTopic, setQuizTopic] = useState<string>(initialState.quizTopic)
-    const [result, setResult] = useState<Result[]>(initialState.result)
-    const [userDetails, setUserDetails] = useState<UserDetails>(initialState.userDetails)
+    const [quizzes, setQuizzes] = useState<Record<string, Topic>>({});
+    const [loading, setLoading] = useState<boolean>(true);
+    const [timer, setTimer] = useState<number>(initialState.timer);
+    const [endTime, setEndTime] = useState<number>(initialState.endTime);
+    const [quizTopic, setQuizTopic] = useState<string>(initialState.quizTopic);
+    const [result, setResult] = useState<Result[]>(initialState.result);
+    const [userDetails, setUserDetails] = useState<UserDetails>(initialState.userDetails);
     const [currentScreen, setCurrentScreen] = useState<ScreenTypes>(
         initialState.currentScreen
-    )
-    const [questions, setQuestions] = useState<Question[]>([])
+    );
+    const [questions, setQuestions] = useState<Question[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await loadQuizData(quizList);
-                setQuizzes(data);
+                const fetchedTopics = data.reduce((topics: any, item) => {
+                    const topic = item.topic;
+                    topics[topic] = item;
+                    return topics;
+                }, {});
+                console.log(fetchedTopics);
+                setQuizzes(fetchedTopics);
                 setLoading(false);
             } catch (error) {
                 console.error('Error loading quiz data', error);
@@ -41,8 +47,8 @@ const QuizProvider = ({ children, quizList, userQuizList }: QuizProviderProps) =
 
 
     useEffect(() => {
-        if (quizzes.length > 0) {
-            const { questions: quizQuestions, totalTime } = quizzes[0];
+        if (quizzes[quizTopic]) {
+            const { questions: quizQuestions, totalTime } = quizzes[quizTopic];
             setTimer(totalTime);
             setQuestions(quizQuestions);
         }
@@ -57,27 +63,6 @@ const QuizProvider = ({ children, quizList, userQuizList }: QuizProviderProps) =
     if (loading) {
         return <div>Loading...</div>
     }
-
-    // const quizContextValue = {
-    //     quizList,
-    //     userQuizList,
-    //     currentScreen,
-    //     setCurrentScreen,
-    //     quizTopic,
-    //     selectQuizTopic,
-    //     questions,
-    //     setQuestions,
-    //     result,
-    //     setResult,
-    //     quizDetails,
-    //     userDetails,
-    //     setUserDetails,
-    //     timer,
-    //     setTimer,
-    //     endTime,
-    //     setEndTime,
-    // }
-
 
     const quizContextValue = {
         quizList,
