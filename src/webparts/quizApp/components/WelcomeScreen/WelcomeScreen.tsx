@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChoiceGroup, IChoiceGroupOption, PrimaryButton } from '@fluentui/react';
+import { DetailsList, IChoiceGroupOption, IColumn, PrimaryButton, SelectionMode } from '@fluentui/react';
 import { useQuiz } from '../../context/QuizContext';
 import { ScreenTypes, Topic } from '../../../../shared/types';
 import styles from './Welcome.module.scss';
@@ -40,23 +40,30 @@ const WelcomeScreen: React.FC<WelcomeProps> = () => {
         selectQuizTopic(selectedTopic ?? '');
         setCurrentScreen(ScreenTypes.UserDetails);
     }
-    const onChange = (event: React.FormEvent<HTMLElement>, item?: IChoiceGroupOption): void => {
-        setSelectedTopic(item?.key);
+    const onItemInvoked = (item: any): void => {
+        setSelectedTopic(item.text);
     };
+    const columns: IColumn[] = [
+        { key: 'title', name: 'text', fieldName: 'text', minWidth: 100, maxWidth: 200, isResizable: false },
+        // Add more columns as needed
+    ];
     return (
         <div className={styles.container}>
             <h2>Welcome to the Quiz!</h2>
             <section>
                 <p>Here are the instructions for the quiz:</p>
                 <ul>
+                    <li>Select any available quiz you want to attempt.</li>
                     <li>Read each question carefully.</li>
                     <li>Select the correct answer.</li>
                     <li>Click the "Submit" button to submit your answers.</li>
                 </ul>
-                <ChoiceGroup options={topics} label='Topics' onChange={onChange} />
+                <DetailsList isHeaderVisible={false} items={topics} columns={columns} selectionMode={SelectionMode.single} onActiveItemChanged={onItemInvoked} onItemInvoked={onItemInvoked} />
             </section>
+            <div style={{ textAlign: 'right' }}>
+                <PrimaryButton onClick={goToQuizDetailsScreen} disabled={!selectedTopic}>Start Quiz</PrimaryButton>
+            </div>
 
-            <PrimaryButton onClick={goToQuizDetailsScreen} disabled={!selectedTopic}>Start Quiz</PrimaryButton>
         </div>
     );
 };

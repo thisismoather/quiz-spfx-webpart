@@ -69,27 +69,35 @@ const UserDetailsScreen: React.FC = () => {
     const hasErrors = Object.values(errors).some(error => error !== '');
 
     return (
-        <Stack tokens={{ childrenGap: 20 }} styles={{ root: { height: '50vh', justifyContent: 'space-between' } }}>
-            <Stack tokens={{ childrenGap: 20 }}>
-                <TextField label="Name" name="name" value={form.name} onChange={handleInputChange} required errorMessage={errors.name} />
-                <TextField label="Email" name="email" value={form.email} onChange={handleInputChange} required errorMessage={errors.email} />
-                <ChoiceGroup
-                    label="Gender"
-                    selectedKey={form.gender}
-                    options={[
-                        { key: 'Male', text: 'Male' },
-                        { key: 'Female', text: 'Female' },
-                    ]}
-                    onChange={handleGenderChoiceGroupChange}
-                    required
-                />
-                <ComboBox label="Country" options={countries} onChange={handleComboBoxChange} allowFreeform autoComplete="on" required errorMessage={errors.country} />
+        <div>
+            <Stack tokens={{ childrenGap: 10 }} styles={{ root: { height: '50vh', justifyContent: 'space-between', overflowY: 'auto', maxHeight: '100vh' } }}>
+                <Stack tokens={{ childrenGap: 10 }}>
+                    <TextField label="Name" name="name" value={form.name} onChange={handleInputChange} required errorMessage={errors.name} />
+                    <TextField label="Email" name="email" value={form.email} onChange={handleInputChange} required errorMessage={errors.email} />
+                    <ChoiceGroup
+                        label="Gender"
+                        selectedKey={form.gender}
+                        options={[
+                            { key: 'Male', text: 'Male' },
+                            { key: 'Female', text: 'Female' },
+                        ]}
+                        styles={{
+                            flexContainer: {
+                                display: "flex",
+                                alignItems: "center"
+                            }
+                        }}
+                        onChange={handleGenderChoiceGroupChange}
+                        required
+                    />
+                    <ComboBox label="Country" options={countries} onChange={handleComboBoxChange} allowFreeform autoComplete="on" required errorMessage={errors.country} />
 
+                </Stack>
+                <Stack horizontalAlign="end">
+                    <PrimaryButton text="Start Quiz" onClick={startQuiz} disabled={hasErrors} />
+                </Stack>
             </Stack>
-            <Stack horizontalAlign="end">
-                <PrimaryButton text="Start Quiz" onClick={startQuiz} disabled={hasErrors} />
-            </Stack>
-        </Stack>
+        </div>
     );
 
 };
