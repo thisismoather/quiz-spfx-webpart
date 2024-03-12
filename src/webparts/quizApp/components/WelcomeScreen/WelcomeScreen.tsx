@@ -1,3 +1,6 @@
+/**
+ * Represents the welcome screen component of the quiz application.
+ */
 import * as React from 'react';
 import { DetailsList, IChoiceGroupOption, IColumn, PrimaryButton, SelectionMode } from '@fluentui/react';
 import { useQuiz } from '../../context/QuizContext';

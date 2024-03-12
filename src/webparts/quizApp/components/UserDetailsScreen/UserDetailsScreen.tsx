@@ -1,3 +1,7 @@
+/**
+ * Represents the UserDetailsScreen component.
+ * This component is responsible for rendering the user details form and handling user input.
+ */
 import { ChoiceGroup, ComboBox, IChoiceGroupOption, IComboBox, IComboBoxOption, PrimaryButton, Stack, TextField } from '@fluentui/react';
 import * as  React from 'react';
 import { useQuiz } from '../../context/QuizContext';

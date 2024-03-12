@@ -5,6 +5,11 @@ import type { IQuizAppProps } from './IQuizAppProps';
 import QuizProvider from '../context/QuizProvider';
 import Main from './Main/Main';
 
+/**
+ * Represents the QuizApp component.
+ * @param {IQuizAppProps} props - The props for the QuizApp component.
+ * @returns {JSX.Element} The rendered QuizApp component.
+ */
 const QuizApp: React.FC<IQuizAppProps> = ({
   quizList,
   userQuizList,

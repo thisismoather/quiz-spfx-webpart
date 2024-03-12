@@ -1,6 +1,15 @@
+/**
+ * Provides the context for the quiz application.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.quizList - The list name for quizzes.
+ * @param {string} props.userQuizList - The list name for user quizzes.
+ * @param {ReactNode} props.children - The child components.
+ * @returns {JSX.Element} The rendered QuizProvider component.
+ */
 import * as React from 'react';
 import { ReactNode, useEffect, useState } from 'react'
-// import { QuizContextTypes, Result, ScreenTypes, Topic } from '../../../shared/types'
 import { Question, Result, ScreenTypes, Topic, UserDetails } from '../../../shared/types'
 import { QuizContext, initialState } from './QuizContext'
 import { loadQuizData } from '../../../shared/services/SPService';

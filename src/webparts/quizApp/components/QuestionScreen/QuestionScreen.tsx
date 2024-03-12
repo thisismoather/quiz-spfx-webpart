@@ -1,3 +1,6 @@
+/**
+ * Renders the screen for displaying and answering quiz questions.
+ */
 import * as React from 'react';
 import { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';

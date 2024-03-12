@@ -5,6 +5,12 @@ import { QuizDetails, Result, TimeApiResponse } from "../types";
 import { formatTime } from "../../webparts/quizApp/utils/helper";
 
 const timeApiUrl = "https://prod-248.westeurope.logic.azure.com/workflows/3dea4dbbf09d40f59f17225ffd6d7265/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=7cunIzBYKssiMtjG-aN25RHKT66B_j3rdFbw1Agm7W8&TimeZone=";
+
+/**
+ * Loads quiz data from SharePoint list.
+ * @param list - The ID of the SharePoint list.
+ * @returns An array of quiz objects.
+ */
 const loadQuizData = async (list: string) => {
     try {
         const _sp: SPFI = getSP();
@@ -39,6 +45,13 @@ const loadQuizData = async (list: string) => {
     }
 };
 
+/**
+ * Saves user details to SharePoint list.
+ * @param list - The ID of the SharePoint list.
+ * @param userDetails - The user details to be saved.
+ * @param time - The time in milliseconds.
+ * @returns The newly created item in the SharePoint list.
+ */
 const saveUserDetails = async (list: string, userDetails: any, time: number) => {
     try {
         const _sp: SPFI = getSP();
@@ -59,6 +72,16 @@ const saveUserDetails = async (list: string, userDetails: any, time: number) => 
     }
 }
 
+
+/**
+ * Adds quiz details to an existing item in the SharePoint list.
+ * @param list - The ID of the SharePoint list.
+ * @param itemId - The ID of the item in the SharePoint list.
+ * @param quizDetails - The quiz details to be added.
+ * @param result - The quiz result.
+ * @param endTime - The end time of the quiz.
+ * @returns The updated item in the SharePoint list.
+ */
 const addQuizDetails = async (list: string, itemId: number, quizDetails: QuizDetails, result: Result[], endTime: string) => {
     try {
         const _sp: SPFI = getSP();
@@ -83,6 +106,10 @@ const addQuizDetails = async (list: string, itemId: number, quizDetails: QuizDet
 
 }
 
+/**
+ * Gets the current time from the TimeIO API.
+ * @returns A promise that resolves to the current time.
+ */
 const getCurrentTime = async (): Promise<TimeApiResponse> => {
     try {
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -100,6 +127,11 @@ const getCurrentTime = async (): Promise<TimeApiResponse> => {
     }
 };
 
+/**
+ * Gets the start and end time based on the provided time.
+ * @param time - The time in milliseconds.
+ * @returns A promise that resolves to the start and end time.
+ */
 const getStartAndEndTime = async (time: number): Promise<any> => {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const timeSpan = `00:00:0${formatTime(time)}`
