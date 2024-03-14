@@ -6,12 +6,28 @@ This guide provides instructions on how to deploy and configure the SPFx Quiz we
 
 - SharePoint Online tenant
 - SharePoint Framework development environment
+- A Quiz list with at least one record. (See the "Quiz List" section below for details on how to set this up)
+- A User Quiz list. (See the "User Quiz List" section below for details on how to set this up)
 
 ## Deployment
 
-1. Clone the repository or download the SPFx solution package (.sppkg file).
-2. Upload the solution package to the SharePoint App Catalog.
-3. Deploy the solution package.
+1. Clone or download this repository.
+2. Run the following commands in your terminal:
+
+```
+npm install # to install the npm dependencies
+gulp serve # to display in Developer Workbench (recommend using your tenant workbench so you can test with real lists within your site)
+
+```
+
+3. To package and deploy, run the following commands in your terminal:
+
+```
+gulp bundle --ship 
+gulp package-solution --ship
+
+```
+4. Add the .sppkg file to your SharePoint App Catalog.
 
 ## Configuration
 
@@ -23,7 +39,35 @@ Create a new list named "Quiz" with the following columns:
 - Level (Type: Choice): The difficulty level of the quiz. Options: Beginner, Intermediate, Advanced.
 - TotalQuestions (Type: Number): The total number of questions in the quiz.
 - TotalScore (Type: Number): The total score of the quiz.
-- Questions (Type: Multiple lines of text): The questions for the quiz.
+- Questions (Type: Multiple lines of text): An array of question objects. Each object has the following properties:
+  - question: The question text.
+  - choices: An array of possible answers.
+  - type: The type of question. Possible values are 'MCQs', 'boolean', and 'MAQs'.
+  - correctAnswers: An array of correct answers.
+  - score: The score for the question.
+
+  Example of Questions array:
+
+```json
+[
+    {
+      "question": "What is the capital of France?",
+      "choices": ["Paris", "London", "Berlin", "Madrid"],
+      "type": "MCQs",
+      "correctAnswers": ["Paris"],
+      "score": 10
+    },
+    {
+      "question": "Is JavaScript a statically typed language?",
+      "choices": ["Yes", "No"],
+      "type": "boolean",
+      "correctAnswers": ["No"],
+      "score": 10
+    }
+]
+```
+
+> **Note:** In order to start the Quiz app, the Quiz list must have at least one record.
 
 ### User Quiz List
 
@@ -40,10 +84,13 @@ Create a new list named "User Quiz" with the following columns:
 - StartTime (Type: Date and Time): The time when the user started the quiz.
 - EndTime (Type: Date and Time): The time when the user finished the quiz.
 
+> **Note:** Items in the User Quiz list will be added by the web part itself.
+
 ## Using the Web Part
 
 1. Add the web part to a page.
-2. Configure the web part properties as needed.
+2. Edit the web part properties and select the Quiz list and User Quiz list created earlier.
+> **Note:** The lists can have any name, but the column names must match exactly with the names specified in this guide for the web part to function correctly.
 
 ## Troubleshooting
 
